@@ -9,8 +9,12 @@ class MOSFET{
   public:
     MOSFET(uint8_t gate): _gate(gate)
     {};
-    void on();
-    void off();
+    void on(){
+      analogWrite(_gate, 255);
+    };
+    void off(){
+      analogWrite(_gate, 0);
+    };  
 };
 
 
