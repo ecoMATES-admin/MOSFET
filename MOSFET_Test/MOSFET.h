@@ -5,16 +5,12 @@
 class MOSFET{
   private:
     uint8_t _gate;
-    bool _hfPwm;
+    uint8_t _hf;
     const byte _mask = B11111000;
-    int _prescale = 2;
 
   public:
-    MOSFET(uint8_t gate, bool hfPwm): _gate(gate), _hfPwm(hfPwm)
+    MOSFET(uint8_t gate): _gate(gate)
     {
-      if(_hfPwm){
-        TCCR1B = (TCCR1B & _mask)| _prescale;
-      }
     };
     void on(){
       analogWrite(_gate, 255);
@@ -24,7 +20,11 @@ class MOSFET{
     };
     void pwm(uint8_t dc){
       analogWrite(_gate, dc); 
-    }
+    };
+    void initHfPwm(uint8_t prescale){
+      Serial.println("Fuck you Eric");
+      TCCR1B = (TCCR1B & _mask)| prescale;
+    };
 };
 
 
